@@ -4,8 +4,8 @@ function makeDataPackage() {
     'name': "",
     'author': "",
     'url': "",
-    'ingredients': [],
-    'steps': [],
+    'ingredients': "",
+    'steps': "",
   };
 }
 
@@ -47,15 +47,18 @@ let data = parseDataPackage(raw);
 let formElement = null;
 let nameFormElement = null;
 let authorFormElement = null;
+let urlFormElement = null;
+let ingredientsFormElement = null;
+let stepsFormElement = null;
 function buildForm() {
   console.log('[R] called buildForm');
   formElement = window.document.createElement('FORM');
   formElement.action='';
   formElement.onsubmit="event.preventDefault();";
-  function addFormElement(name, title) {
+  function addFormElement(name, title, type) {
 
     let newFormElement = window.document.createElement('INPUT');
-    newFormElement.type='TEXT';
+    newFormElement.type=type;
     newFormElement.id=name;
     newFormElement.addEventListener("change", exportDataPackage);
     newFormElement.addEventListener("keyup", exportDataPackage);
@@ -69,8 +72,11 @@ function buildForm() {
     formElement.appendChild(newContainerElement);
     return newFormElement;
   }
-  nameFormElement = addFormElement('name', 'Name:');
-  authorFormElement = addFormElement('author', 'Author:');
+  nameFormElement = addFormElement('name', 'Name:', 'TEXT');
+  authorFormElement = addFormElement('author', 'Author:', 'TEXT');
+  urlFormElement = addFormElement('author', 'URL:', 'TEXT');
+  ingredientsFormElement = addFormElement('author', 'Ingredients:', 'TEXTAREA');
+  stepsFormElement = addFormElement('author', 'Steps:', 'TEXTAREA');
   
   // Set up form based on the current form version
   nameFormElement.value=data['name'];
@@ -81,19 +87,11 @@ function buildForm() {
 function buildDataPackage() {
   console.log('[R] called buildDataPackage');
   let parsedData = makeDataPackage();
-  console.log('>>> nameFormElement:');
-  console.log(nameFormElement);
-  console.log(nameFormElement.value);
   parsedData['name'] = nameFormElement.value;
-  console.log('>>> authorFormElement:');
-  console.log(authorFormElement);
-  console.log(authorFormElement.value);
   parsedData['author'] = authorFormElement.value;
-  // parsedData['url'] = data['url'];
-  // parsedData['ingredients'] = data['ingredients'];
-  // parsedData['steps'] = data['steps'];
-  console.log('>>> parsedData');
-  console.log(parsedData);
+  parsedData['url'] = urlFormElement.value;
+  parsedData['ingredients'] = ingredientsFormElement.value;
+  parsedData['steps'] = stepsFormElement.value;
   return parsedData;
 }
 
