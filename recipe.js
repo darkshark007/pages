@@ -30,6 +30,7 @@ function exportDataPackage() {
   let url = new URL(window.location.href);
   let data = buildDataPackage();
   let encoded = btoa(JSON.stringify(data))
+  console.log(`[R] encoded: ${encoded}`);
   url.searchParams.append('d', encoded);
   window.history.pushState({}, '', url);
 }
@@ -91,6 +92,8 @@ function buildDataPackage() {
   // parsedData['url'] = data['url'];
   // parsedData['ingredients'] = data['ingredients'];
   // parsedData['steps'] = data['steps'];
+  console.log('>>> parsedData');
+  console.log(parsedData);
   return parsedData;
 }
 
