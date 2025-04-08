@@ -56,9 +56,11 @@ let data = parseDataPackage(raw);
 
 function buildForm() {
   console.log('[R] called buildForm');
-  let form = window.document.createElement('FORM');
+  let formElement = window.document.createElement('FORM');
+  formElement.action='';
+  formElement.onsubmit="event.preventDefault();";
   let nameElement = window.document.createElement('INPUT');
-  form.appendChild(nameElement);
+  formElement.appendChild(nameElement);
   nameElement.type='TEXT';
   nameElement.id='name';
   nameElement.addEventListener("change", exportDataPackage);
