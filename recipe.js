@@ -63,3 +63,7 @@ function buildForm() {
 
   window.document.appendChild(form);
 }
+
+// Main
+exportDataPackage();
+buildForm();
