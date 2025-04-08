@@ -65,7 +65,6 @@ function buildForm() {
   let nameElement = window.document.createElement('INPUT');
   form.appendChild(nameElement);
   nameElement.type='TEXT';
-  nameElement.name='name';
   nameElement.id='name';
   nameElement.addEventListener("change", exportDataPackage);
 
@@ -81,6 +80,7 @@ function buildForm() {
 
 // Main
 window.onload = function onload() {
+  console.log('[R] called onload');
   buildForm();
   exportDataPackage();
 }
