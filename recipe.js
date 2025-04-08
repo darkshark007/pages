@@ -65,5 +65,5 @@ function buildForm() {
 }
 
 // Main
-exportDataPackage();
 buildForm();
+exportDataPackage();
