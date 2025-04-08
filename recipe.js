@@ -61,7 +61,7 @@ function buildForm() {
   // Set up based on the current form version
   nameElement.value=data['name'];
 
-  window.document.appendChild(form);
+  document.body.appendChild(form);
 }
 
 // Main
