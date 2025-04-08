@@ -40,12 +40,18 @@ function exportDataPackage() {
   console.log('[R] called exportDataPackage');
   let params = new URL(window.location.href);
   let data = buildDataPackage();
-  let encoded = atob(data);
+  let encoded = btoa(JSON.stringify(data))
   params.searchParams.append('d', encoded);
 }
 
 let params = new URLSearchParams(window.document.location.search);
-let data = parseDataPackage(params.get("d"));
+let data = parseDataPackage(
+  JSON.parse(
+    atob(
+      params.get("d")
+    )
+  )
+);
 
 function buildForm() {
   console.log('[R] called buildForm');
