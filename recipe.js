@@ -82,7 +82,11 @@ function buildDataPackage() {
   let parsedData = makeDataPackage();
   console.log('>>> nameFormElement:');
   console.log(nameFormElement);
+  console.log(nameFormElement.value);
   parsedData['name'] = nameFormElement.value;
+  console.log('>>> authorFormElement:');
+  console.log(authorFormElement);
+  console.log(authorFormElement.value);
   parsedData['author'] = authorFormElement.value;
   // parsedData['url'] = data['url'];
   // parsedData['ingredients'] = data['ingredients'];
