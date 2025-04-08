@@ -43,10 +43,11 @@ if (raw) {
 }
 let data = parseDataPackage(raw);
 
+let formElement = null;
 let nameFormElement = null;
 function buildForm() {
   console.log('[R] called buildForm');
-  let formElement = window.document.createElement('FORM');
+  formElement = window.document.createElement('FORM');
   formElement.action='';
   formElement.onsubmit="event.preventDefault();";
   function addFormElement(name, title) {
@@ -74,7 +75,7 @@ function buildForm() {
   console.log(window);
   console.log(window.document);
   console.log(window.document.body);
-  window.document.body.appendChild(form);
+  window.document.body.appendChild(formElement);
 }
 
 function buildDataPackage() {
