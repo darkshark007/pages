@@ -82,6 +82,10 @@ function buildForm() {
   
   // Set up form based on the current form version
   nameFormElement.value=data['name'];
+  authorFormElement.value=data['author'];
+  urlFormElement.value=data['url'];
+  ingredientsFormElement.value=data['ingredients'];
+  stepsFormElement.value=data['steps'];
 
   window.document.body.appendChild(formElement);
 }
