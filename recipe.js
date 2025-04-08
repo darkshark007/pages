@@ -10,6 +10,7 @@ function makeDataPackage() {
 }
 
 function parseDataPackage(data) {
+  console.log('[R] called parseDataPackage');
   let parsedData = makeDataPackage();
   if (!data) return parsedData;
 
@@ -24,6 +25,7 @@ function parseDataPackage(data) {
 }
 
 function buildDataPackage() {
+  console.log('[R] called buildDataPackage');
   let nameElement = document.getElementById('name');
   let parsedData = makeDataPackage();
   parsedData['name'] = nameElement.value;
@@ -35,6 +37,7 @@ function buildDataPackage() {
 }
 
 function exportDataPackage() {
+  console.log('[R] called exportDataPackage');
   let params = new URL(window.location.href);
   let data = buildDataPackage();
   let encoded = atob(data);
@@ -45,6 +48,7 @@ let params = new URLSearchParams(document.location.search);
 let data = parseDataPackage(params.get("d"));
 
 function buildForm() {
+  console.log('[R] called buildForm');
   let form = document.createElement('FORM');
   let nameElement = document.createElement('INPUT');
   form.appendChild(nameElement);
