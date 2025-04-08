@@ -67,20 +67,18 @@ function buildForm() {
     return newFormElement;
   }
   nameFormElement = addFormElement('name', 'Name');
-
   
-  // Set up based on the current form version
+  // Set up form based on the current form version
   nameFormElement.value=data['name'];
 
-  console.log(window);
-  console.log(window.document);
-  console.log(window.document.body);
   window.document.body.appendChild(formElement);
 }
 
 function buildDataPackage() {
   console.log('[R] called buildDataPackage');
   let parsedData = makeDataPackage();
+  console.log('>>> nameFormElement:');
+  console.log(nameFormElement);
   parsedData['name'] = nameFormElement.value;
   // parsedData['author'] = data['author'];
   // parsedData['url'] = data['url'];
