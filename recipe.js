@@ -31,7 +31,7 @@ function exportDataPackage() {
   let data = buildDataPackage();
   let encoded = btoa(JSON.stringify(data))
   console.log(`[R] encoded: ${encoded}`);
-  url.searchParams.append('d', encoded);
+  url.searchParams.set('d', encoded);
   window.history.pushState({}, '', url);
 }
 
