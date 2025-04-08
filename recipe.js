@@ -57,7 +57,9 @@ function buildForm() {
   formElement.onsubmit="event.preventDefault();";
   function addFormElement(name, title, type) {
 
-    let newFormElement = window.document.createElement('INPUT');
+    let newFormElement = null;
+    if (type === "TEXT") newFormElement = window.document.createElement('INPUT');
+    if (type === "TEXTAREA") newFormElement = window.document.createElement('textarea');
     newFormElement.type=type;
     newFormElement.id=name;
     newFormElement.addEventListener("change", exportDataPackage);
@@ -74,9 +76,9 @@ function buildForm() {
   }
   nameFormElement = addFormElement('name', 'Name:', 'TEXT');
   authorFormElement = addFormElement('author', 'Author:', 'TEXT');
-  urlFormElement = addFormElement('author', 'URL:', 'TEXT');
-  ingredientsFormElement = addFormElement('author', 'Ingredients:', 'TEXTAREA');
-  stepsFormElement = addFormElement('author', 'Steps:', 'TEXTAREA');
+  urlFormElement = addFormElement('url', 'URL:', 'TEXT');
+  ingredientsFormElement = addFormElement('ingredients', 'Ingredients:', 'TEXTAREA');
+  stepsFormElement = addFormElement('steps', 'Steps:', 'TEXTAREA');
   
   // Set up form based on the current form version
   nameFormElement.value=data['name'];
