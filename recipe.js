@@ -39,15 +39,10 @@ function buildDataPackage() {
 function exportDataPackage() {
   console.log('[R] called exportDataPackage');
   let url = new URL(window.location.href);
-  console.log('>>> WTF?! 1');
   let data = buildDataPackage();
-  console.log('>>> WTF?! 2');
   let encoded = btoa(JSON.stringify(data))
-  console.log('>>> WTF?! 3');
   url.searchParams.append('d', encoded);
-  console.log('>>> WTF?! 4');
-  window.history.pushState("id","id",url);
-  console.log('>>> WTF?! 5');
+  window.history.pushState({}, '', url);
 }
 
 let params = new URLSearchParams(window.document.location.search);
