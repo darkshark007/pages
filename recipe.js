@@ -68,5 +68,7 @@ function buildForm() {
 }
 
 // Main
-buildForm();
-exportDataPackage();
+window.onload = function onload() {
+  buildForm();
+  exportDataPackage();
+}
