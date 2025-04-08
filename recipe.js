@@ -45,6 +45,7 @@ let data = parseDataPackage(raw);
 
 let formElement = null;
 let nameFormElement = null;
+let authorFormElement = null;
 function buildForm() {
   console.log('[R] called buildForm');
   formElement = window.document.createElement('FORM');
@@ -56,6 +57,7 @@ function buildForm() {
     newFormElement.type='TEXT';
     newFormElement.id=name;
     newFormElement.addEventListener("change", exportDataPackage);
+    newFormElement.addEventListener("keyup", exportDataPackage);
 
     let newTitleElement = window.document.createElement('DIV');
     newTitleElement.innerText = title;
@@ -66,7 +68,8 @@ function buildForm() {
     formElement.appendChild(newContainerElement);
     return newFormElement;
   }
-  nameFormElement = addFormElement('name', 'Name');
+  nameFormElement = addFormElement('name', 'Name:');
+  authorFormElement = addFormElement('author', 'Author:');
   
   // Set up form based on the current form version
   nameFormElement.value=data['name'];
@@ -80,7 +83,7 @@ function buildDataPackage() {
   console.log('>>> nameFormElement:');
   console.log(nameFormElement);
   parsedData['name'] = nameFormElement.value;
-  // parsedData['author'] = data['author'];
+  parsedData['author'] = authorFormElement.value;
   // parsedData['url'] = data['url'];
   // parsedData['ingredients'] = data['ingredients'];
   // parsedData['steps'] = data['steps'];
