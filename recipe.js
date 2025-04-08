@@ -45,13 +45,13 @@ function exportDataPackage() {
 }
 
 let params = new URLSearchParams(window.document.location.search);
-let data = parseDataPackage(
-  JSON.parse(
-    atob(
-      params.get("d")
-    )
-  )
-);
+let raw = params.get("d");
+console.log('raw data:');
+console.log(raw)
+if (raw) {
+ raw = JSON.parse(atob(raw));
+}
+let data = parseDataPackage(raw);
 
 function buildForm() {
   console.log('[R] called buildForm');
@@ -61,7 +61,7 @@ function buildForm() {
   nameElement.type='TEXT';
   nameElement.name='name';
   nameElement.id='name';
-  nameElement.onchange=exportDataPackage;
+  nameElement.addEventListener("change", exportDataPackage);
 
   
   // Set up based on the current form version
