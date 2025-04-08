@@ -10,7 +10,7 @@ function makeDataPackage() {
 }
 
 function parseDataPackage(data) {
-  let parsedData = makeDataPacka
+  let parsedData = makeDataPackage();
   if (!data) return parsedData;
 
   if (data['version'] === 1) {
