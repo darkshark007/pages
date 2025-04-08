@@ -61,6 +61,9 @@ function buildForm() {
   // Set up based on the current form version
   nameElement.value=data['name'];
 
+  console.log(window);
+  console.log(window.document);
+  console.log(window.document.body);
   window.document.body.appendChild(form);
 }
 
