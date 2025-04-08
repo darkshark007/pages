@@ -24,17 +24,6 @@ function parseDataPackage(data) {
   return parsedData;
 }
 
-function buildDataPackage() {
-  console.log('[R] called buildDataPackage');
-  let nameElement = window.document.getElementById('name');
-  let parsedData = makeDataPackage();
-  parsedData['name'] = nameElement.value;
-  // parsedData['author'] = data['author'];
-  // parsedData['url'] = data['url'];
-  // parsedData['ingredients'] = data['ingredients'];
-  // parsedData['steps'] = data['steps'];
-  return parsedData;
-}
 
 function exportDataPackage() {
   console.log('[R] called exportDataPackage');
@@ -54,25 +43,49 @@ if (raw) {
 }
 let data = parseDataPackage(raw);
 
+let nameFormElement = null;
 function buildForm() {
   console.log('[R] called buildForm');
   let formElement = window.document.createElement('FORM');
   formElement.action='';
   formElement.onsubmit="event.preventDefault();";
-  let nameElement = window.document.createElement('INPUT');
-  formElement.appendChild(nameElement);
-  nameElement.type='TEXT';
-  nameElement.id='name';
-  nameElement.addEventListener("change", exportDataPackage);
+  function addFormElement(name, title) {
+
+    let newFormElement = window.document.createElement('INPUT');
+    newFormElement.type='TEXT';
+    newFormElement.id=name;
+    newFormElement.addEventListener("change", exportDataPackage);
+
+    let newTitleElement = window.document.createElement('DIV');
+    newTitleElement.innerText = title;
+
+    let newContainerElement = window.document.createElement('DIV');
+    newContainerElement.appendChild(newTitleElement);
+    newContainerElement.appendChild(newFormElement);
+    formElement.appendChild(newContainerElement);
+    return newFormElement;
+  }
+  nameFormElement = addFormElement('name', 'Name');
 
   
   // Set up based on the current form version
-  nameElement.value=data['name'];
+  nameFormElement.value=data['name'];
 
   console.log(window);
   console.log(window.document);
   console.log(window.document.body);
   window.document.body.appendChild(form);
+}
+
+function buildDataPackage() {
+  console.log('[R] called buildDataPackage');
+  let parsedData = makeDataPackage();
+  parsedData['name'] = nameFormElement.value;
+  // parsedData['author'] = data['author'];
+  // parsedData['url'] = data['url'];
+  // parsedData['ingredients'] = data['ingredients'];
+  // parsedData['steps'] = data['steps'];
+  return parsedData;
 }
 
 // Main
