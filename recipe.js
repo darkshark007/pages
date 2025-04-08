@@ -38,10 +38,11 @@ function buildDataPackage() {
 
 function exportDataPackage() {
   console.log('[R] called exportDataPackage');
-  let params = new URL(window.location.href);
+  let url = new URL(window.location.href);
   let data = buildDataPackage();
   let encoded = btoa(JSON.stringify(data))
-  params.searchParams.append('d', encoded);
+  url.searchParams.append('d', encoded);
+  window.history.pushState("id","id",url);
 }
 
 let params = new URLSearchParams(window.document.location.search);
