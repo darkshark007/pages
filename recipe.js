@@ -188,12 +188,6 @@ async function ungzipString(base64) {
   return text;
 }
 
-// Example usage:
-gzipString(testString).then(base64 => {
-  ungzipString(base64).then(console.log); // logs: "Back to text"
-});
-
-
 // Main
 window.onload = async function onload() {
   console.log('[R] called onload');
