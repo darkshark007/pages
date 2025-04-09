@@ -114,11 +114,11 @@ function mountView() {
 
   function makeDynamicRow(ingredient, step) {
     ingredientStepHtml += `
-      <tr style="border-bottom: 1px solid navy">
-        <td>
+      <tr>
+        <td style="border-bottom: 1px solid navy" width=40%>
           ${ingredient}
         </td>
-        <td>
+        <td style="border-bottom: 1px solid navy" width=60%>
           ${step}
         </td>
       </tr>
@@ -133,14 +133,14 @@ function mountView() {
 
   viewElement.innerHTML = `
     <div>
-      <table id="recipeTable">
-        <tr style="border-bottom: 2px solid salmon">
-          <td>
+      <table id="recipeTable" width="700px">
+        <tr>
+          <td style="border-bottom: 2px solid salmon" colspan=2>
             "${parsedData['name']}" from ${parsedData['author']}
           </td>
         </tr>
-        <tr style="border-bottom: 1px solid navy">
-          <td>
+        <tr>
+          <td style="border-bottom: 1px solid navy" colspan=2>
             <a href="${parsedData['url']}" style="font-size: small;">${parsedData['url']}</a>
           </td>
         </tr>
