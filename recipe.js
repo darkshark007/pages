@@ -197,11 +197,11 @@ window.onload = async function onload() {
   console.log('raw data:');
   console.log(raw)
   if (raw) {
-    await ungzipString(base64).then(function(decoded) {
+    await ungzipString(raw).then(function(decoded) {
       data = JSON.parse(decoded);
+      
+      buildPage();
+      exportDataPackage();
     });
   }
-
-  buildPage();
-  exportDataPackage();
 }
