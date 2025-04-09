@@ -44,14 +44,23 @@ if (raw) {
 }
 let data = parseDataPackage(raw);
 
+let contentContainer = null;
+let buttonView = null;
+let buttonEdit = null;
+let viewElement = null;
 let formElement = null;
 let nameFormElement = null;
 let authorFormElement = null;
 let urlFormElement = null;
 let ingredientsFormElement = null;
 let stepsFormElement = null;
-function buildForm() {
-  console.log('[R] called buildForm');
+function buildPage() {
+  console.log('[R] called buildPage');
+  contentContainer = window.document.getElementById('contentContainer');
+  buttonView = window.document.getElementById('buttonView');
+  buttonEdit = window.document.getElementById('buttonEdit');
+  buttonView.addListener('click', mountView);
+  buttonEdit.addListener('click', mountEdit);
   formElement = window.document.createElement('FORM');
   formElement.action='';
   formElement.onsubmit="event.preventDefault();";
@@ -87,7 +96,33 @@ function buildForm() {
   ingredientsFormElement.value=data['ingredients'];
   stepsFormElement.value=data['steps'];
 
-  window.document.body.appendChild(formElement);
+  // Build the View Element
+  viewElement = window.document.createElement('DIV');
+
+  
+  mountView();
+}
+
+function mountView() {
+  let parsedData = buildDataPackage();
+
+  viewElement.innerHTML = `
+  <div>
+    ${parsedData['name']}
+  </div>
+  `
+
+  for (let child of contentContainer.children) {
+    contentContainer.removeChild(child);
+  }
+  contentContainer.appendChild(viewElement);
+}
+
+function mountEdit() {
+  for (let child of contentContainer.children) {
+    contentContainer.removeChild(child);
+  }
+  contentContainer.appendChild(formElement);
 }
 
 function buildDataPackage() {
@@ -104,6 +139,6 @@ function buildDataPackage() {
 // Main
 window.onload = function onload() {
   console.log('[R] called onload');
-  buildForm();
+  buildPage();
   exportDataPackage();
 }
