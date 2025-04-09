@@ -35,15 +35,7 @@ function exportDataPackage() {
   window.history.pushState({}, '', url);
 }
 
-let params = new URLSearchParams(window.document.location.search);
-let raw = params.get("d");
-console.log('raw data:');
-console.log(raw)
-if (raw) {
- raw = JSON.parse(atob(raw));
-}
-let data = parseDataPackage(raw);
-
+let data = null;
 let contentContainer = null;
 let buttonView = null;
 let buttonEdit = null;
@@ -174,9 +166,48 @@ function buildDataPackage() {
   return parsedData;
 }
 
+async function gzipString(input) {
+  const encoder = new TextEncoder();
+  const inputStream = new Blob([encoder.encode(input)]).stream();
+  const compressedStream = inputStream.pipeThrough(new CompressionStream('gzip'));
+  const compressedResponse = new Response(compressedStream);
+  const compressedBuffer = await compressedResponse.arrayBuffer();
+
+  // Convert to base64 string
+  const base64 = btoa(String.fromCharCode(...new Uint8Array(compressedBuffer)));
+  return base64;
+}
+
+async function ungzipString(base64) {
+  const binaryString = atob(base64);
+  const binaryData = Uint8Array.from(binaryString, c => c.charCodeAt(0));
+  const inputStream = new Blob([binaryData]).stream();
+  const decompressedStream = inputStream.pipeThrough(new DecompressionStream('gzip'));
+  const decompressedResponse = new Response(decompressedStream);
+  const text = await decompressedResponse.text();
+  return text;
+}
+
+// Example usage:
+gzipString(testString).then(base64 => {
+  ungzipString(base64).then(console.log); // logs: "Back to text"
+});
+
+
 // Main
-window.onload = function onload() {
+window.onload = async function onload() {
   console.log('[R] called onload');
+
+  let params = new URLSearchParams(window.document.location.search);
+  let raw = params.get("d");
+  console.log('raw data:');
+  console.log(raw)
+  if (raw) {
+    await ungzipString(base64).then(function(decoded) {
+      data = JSON.parse(decoded);
+    });
+  }
+
   buildPage();
   exportDataPackage();
 }
