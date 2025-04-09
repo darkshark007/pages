@@ -115,15 +115,16 @@ function mountView() {
   function makeDynamicRow(ingredient, step) {
     ingredientStepHtml += `
       <tr>
-        <td style="border-bottom: 1px solid navy" width=40%>
+        <td style="border-bottom: 1px solid navy; padding-top: 5px; padding-bottom: 5px;" width=40%>
           ${ingredient}
         </td>
-        <td style="border-bottom: 1px solid navy" width=60%>
+        <td style="border-bottom: 1px solid navy; padding-top: 5px; padding-bottom: 5px;" width=60%>
           ${step}
         </td>
       </tr>
     `;
   }
+
 
   for (let idx = 0; idx < rowCount; idx++) {
     let nextIngredient = ingredientRows[idx] || "";
@@ -133,14 +134,14 @@ function mountView() {
 
   viewElement.innerHTML = `
     <div>
-      <table id="recipeTable" width="700px">
+      <table id="recipeTable" width="700px" style="border: 1px outset black; border-radius: 2px; border-spacing: 0px; padding-left: 3px; padding-right: 3px; padding-top: 10px;">
         <tr>
           <td style="border-bottom: 2px solid salmon" colspan=2>
             "${parsedData['name']}" from ${parsedData['author']}
           </td>
         </tr>
         <tr>
-          <td style="border-bottom: 1px solid navy" colspan=2>
+          <td style="border-bottom: 1px solid navy" colspan=2 style="padding-top: 5px; padding-bottom: 5px;">
             <a href="${parsedData['url']}" style="font-size: small;">${parsedData['url']}</a>
           </td>
         </tr>
