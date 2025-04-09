@@ -29,7 +29,8 @@ async function exportDataPackage() {
   console.log('[R] called exportDataPackage');
   let url = new URL(window.location.href);
   let data = buildDataPackage();
-  let encoded = await gzipString(JSON.stringify(data));
+  
+  let encoded = window.LZString.compressToBase64(JSON.stringify(data));
   console.log(`[R] encoded: ${encoded}`);
   url.searchParams.set('d', encoded);
   window.history.pushState({}, '', url);
@@ -197,16 +198,10 @@ window.onload = async function onload() {
   console.log('raw data:');
   console.log(raw)
   if (raw) {
-    await ungzipString(raw).then(function(decoded) {
-      data = JSON.parse(decoded);
-      
-      buildPage();
-      exportDataPackage();
-    });
+    data = JSON.parse(window.LZString.decompressFromBase64(raw));
   } else {
     data = parseDataPackage();
-
-    buildPage();
-    exportDataPackage();
   }
+  buildPage();
+  exportDataPackage();
 }
