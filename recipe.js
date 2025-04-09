@@ -107,23 +107,47 @@ function mountView() {
   console.log('[R] called mountView');
   let parsedData = buildDataPackage();
 
-  viewElement.innerHTML = `
-  <div>
-    <table>
-      <tr>
-        <td>
-          "${parsedData['name']}" from ${parsedData['author']}
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <a href="${parsedData['url']}">${parsedData['url']}</a>
-        </td>
-      </tr>
-    </table>
-  </div>
-  `
+  let ingredientStepHtml = '';
+  let ingredientRows = parsedData['ingredients'].split('\n');
+  let stepRows = parsedData['steps'].split('\n');
+  let rowCount = Math.max(8, ingredientRows.length, stepRows.length);
 
+  function makeDynamicRow(ingredient, step) {
+    ingredientStepHtml += `
+      <tr style="border-bottom: 1px solid navy">
+        <td>
+          ${ingredient}
+        </td>
+        <td>
+          ${step}
+        </td>
+      </tr>
+    `;
+  }
+
+  for (let idx = 0; idx < rowCount; idx++) {
+    let nextIngredient = ingredientRows[idx] || "";
+    let nextStep = stepRows[idx] || "";
+    makeDynamicRow(nextIngredient, nextStep);
+  }
+
+  viewElement.innerHTML = `
+    <div>
+      <table id="recipeTable">
+        <tr style="border-bottom: 2px solid salmon">
+          <td>
+            "${parsedData['name']}" from ${parsedData['author']}
+          </td>
+        </tr>
+        <tr style="border-bottom: 1px solid navy">
+          <td>
+            <a href="${parsedData['url']}" style="font-size: small;">${parsedData['url']}</a>
+          </td>
+        </tr>
+        ${ingredientStepHtml}
+      </table>
+    </div>
+  `
   for (let child of contentContainer.children) {
     contentContainer.removeChild(child);
   }
