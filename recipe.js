@@ -104,11 +104,23 @@ function buildPage() {
 }
 
 function mountView() {
+  console.log('[R] called mountView');
   let parsedData = buildDataPackage();
 
   viewElement.innerHTML = `
   <div>
-    ${parsedData['name']}
+    <table>
+      <tr>
+        <td>
+          "${parsedData['name']}" from ${parsedData['author']}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="${parsedData['url']}">${parsedData['url']}</a>
+        </td>
+      </tr>
+    </table>
   </div>
   `
 
@@ -119,6 +131,7 @@ function mountView() {
 }
 
 function mountEdit() {
+  console.log('[R] called mountEdit');
   for (let child of contentContainer.children) {
     contentContainer.removeChild(child);
   }
