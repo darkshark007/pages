@@ -130,13 +130,21 @@ function mountView() {
       <table id="recipeTable" width="700px" style="border: 1px outset black; border-radius: 2px; border-spacing: 0px; padding-left: 3px; padding-right: 3px; padding-top: 10px; padding-bottom: 5px;">
         <tr>
           <td style="border-bottom: 2px solid salmon" colspan=2>
-            "${parsedData['name']}" from ${parsedData['author']}
+            <span style="font-weight: bold">"${parsedData['name']}"</span> from <span style="font-weight: italic">${parsedData['author']}</span>
           </td>
         </tr>
         <tr>
           <td style="border-bottom: 1px solid navy; padding-top: 5px; padding-bottom: 5px;" colspan=2>
             <a href="${parsedData['url']}" style="font-size: small;">${parsedData['url']}</a>
           </td>
+        </tr>
+        <tr>
+          <tr style="border-bottom: 1px solid navy; padding-top: 5px; padding-bottom: 5px;">
+            Ingredients:
+          </tr>
+          <tr style="border-bottom: 1px solid navy; padding-top: 5px; padding-bottom: 5px;">
+            Recipe Instructions:
+          </tr>
         </tr>
         ${ingredientStepHtml}
       </table>
