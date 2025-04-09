@@ -25,11 +25,11 @@ function parseDataPackage(data) {
 }
 
 
-function exportDataPackage() {
+async function exportDataPackage() {
   console.log('[R] called exportDataPackage');
   let url = new URL(window.location.href);
   let data = buildDataPackage();
-  let encoded = btoa(JSON.stringify(data))
+  let encoded = await gzipString(JSON.stringify(data));
   console.log(`[R] encoded: ${encoded}`);
   url.searchParams.set('d', encoded);
   window.history.pushState({}, '', url);
