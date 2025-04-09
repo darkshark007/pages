@@ -134,14 +134,14 @@ function mountView() {
 
   viewElement.innerHTML = `
     <div>
-      <table id="recipeTable" width="700px" style="border: 1px outset black; border-radius: 2px; border-spacing: 0px; padding-left: 3px; padding-right: 3px; padding-top: 10px;">
+      <table id="recipeTable" width="700px" style="border: 1px outset black; border-radius: 2px; border-spacing: 0px; padding-left: 3px; padding-right: 3px; padding-top: 10px; padding-bottom: 5px;">
         <tr>
           <td style="border-bottom: 2px solid salmon" colspan=2>
             "${parsedData['name']}" from ${parsedData['author']}
           </td>
         </tr>
         <tr>
-          <td style="border-bottom: 1px solid navy" colspan=2 style="padding-top: 5px; padding-bottom: 5px;">
+          <td style="border-bottom: 1px solid navy; padding-top: 5px; padding-bottom: 5px;" colspan=2>
             <a href="${parsedData['url']}" style="font-size: small;">${parsedData['url']}</a>
           </td>
         </tr>
