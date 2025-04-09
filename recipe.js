@@ -203,5 +203,8 @@ window.onload = async function onload() {
       buildPage();
       exportDataPackage();
     });
+  } else {
+    buildPage();
+    exportDataPackage();
   }
 }
