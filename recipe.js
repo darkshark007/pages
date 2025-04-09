@@ -139,12 +139,12 @@ function mountView() {
           </td>
         </tr>
         <tr>
-          <tr style="border-bottom: 1px solid navy; padding-top: 5px; padding-bottom: 5px;">
+          <th style="border-bottom: 1px solid navy; padding-top: 5px; padding-bottom: 5px;">
             Ingredients:
-          </tr>
-          <tr style="border-bottom: 1px solid navy; padding-top: 5px; padding-bottom: 5px;">
+          </th>
+          <th style="border-bottom: 1px solid navy; padding-top: 5px; padding-bottom: 5px;">
             Recipe Instructions:
-          </tr>
+          </th>
         </tr>
         ${ingredientStepHtml}
       </table>
