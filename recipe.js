@@ -34,6 +34,7 @@ async function exportDataPackage() {
   console.log(`[R] encoded: ${encoded}`);
   url.searchParams.set('d', encoded);
   window.history.pushState({}, '', url);
+  window.document.title = `Recipe Card: ${data['name']}`
 }
 
 let data = null;
@@ -130,7 +131,7 @@ function mountView() {
       <table id="recipeTable" width="700px" style="border: 1px outset black; border-radius: 2px; border-spacing: 0px; padding-left: 3px; padding-right: 3px; padding-top: 10px; padding-bottom: 5px;">
         <tr>
           <td style="border-bottom: 2px solid salmon" colspan=2>
-            <span style="font-weight: bold">"${parsedData['name']}"</span> from <span style="font-style: italic;">${parsedData['author']}</span>
+            <span style="font-weight: bold; font-size: x-large;">"${parsedData['name']}"</span> from <span style="font-style: italic;">${parsedData['author']}</span>
           </td>
         </tr>
         <tr>
