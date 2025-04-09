@@ -59,8 +59,8 @@ function buildPage() {
   contentContainer = window.document.getElementById('contentContainer');
   buttonView = window.document.getElementById('buttonView');
   buttonEdit = window.document.getElementById('buttonEdit');
-  buttonView.addListener('click', mountView);
-  buttonEdit.addListener('click', mountEdit);
+  buttonView.addEventListener('click', mountView);
+  buttonEdit.addEventListener('click', mountEdit);
   formElement = window.document.createElement('FORM');
   formElement.action='';
   formElement.onsubmit="event.preventDefault();";
