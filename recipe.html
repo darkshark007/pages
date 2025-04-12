@@ -2,12 +2,48 @@
   <head>
     <script src="./recipe.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/pieroxy/lz-string/libs/lz-string.js"></script>
+    <style>
+      .tooltip {
+        position: relative;
+        display: inline-block;
+        border-bottom: 1px dotted black;
+      }
+      
+      .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        
+        /* Position the tooltip */
+        position: absolute;
+        z-index: 1;
+        top: -5px;
+        left: 105%;
+      }
+      
+      .tooltip:hover .tooltiptext {
+        visibility: visible;
+      }
+    </style>
     <title>Recipe Card</title>
   </head>
   <body>
     <div id="buttonContainer">
       <input type="button" id="buttonView" value="View"/>
       <input type="button" id="buttonEdit" value="Edit"/>
+      <div class="tooltip">(?)
+        <span class="tooltiptext">
+          This tool encodes all recipe data into the URL, so it's easy to bookmark and share recipes!
+
+          A consequence of this is that any changes to the recipe means you must re-bookmark or otherwise update the URL for your Recipe Card.
+
+          Have fun!
+        </span>
+      </div>
     </div>
     <br/><br/>
     <div id="contentContainer"></div>
