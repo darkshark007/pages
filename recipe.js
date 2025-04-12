@@ -84,10 +84,10 @@ function buildPage() {
   urlFormElement = addFormElement('url', 'URL:', 'TEXT');
   urlFormElement.size = 46;
   ingredientsFormElement = addFormElement('ingredients', 'Ingredients:', 'TEXTAREA');
-  ingredientsFormElement.cols = 46;
+  ingredientsFormElement.cols = 41;
   ingredientsFormElement.rows = 14;
   stepsFormElement = addFormElement('steps', 'Steps:', 'TEXTAREA');
-  stepsFormElement.cols = 70;
+  stepsFormElement.cols = 63;
   stepsFormElement.rows = 14;
   
   // Set up form based on the current form version
