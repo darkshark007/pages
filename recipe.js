@@ -41,6 +41,7 @@ let data = null;
 let contentContainer = null;
 let buttonView = null;
 let buttonEdit = null;
+let buttonNew = null;
 let viewElement = null;
 let formElement = null;
 let nameFormElement = null;
@@ -53,8 +54,10 @@ function buildPage() {
   contentContainer = window.document.getElementById('contentContainer');
   buttonView = window.document.getElementById('buttonView');
   buttonEdit = window.document.getElementById('buttonEdit');
+  buttonNew = window.document.getElementById('buttonNew');
   buttonView.addEventListener('click', mountView);
   buttonEdit.addEventListener('click', mountEdit);
+  buttonNew.addEventListener('click', newRecipe);
   formElement = window.document.createElement('FORM');
   formElement.action='';
   formElement.onsubmit="event.preventDefault();";
@@ -102,6 +105,18 @@ function buildPage() {
 
   
   mountView();
+}
+
+function newRecipe() {
+  // Set up form based on the current form version
+  nameFormElement.value = '';
+  authorFormElement.value = '';
+  urlFormElement.value = '';
+  ingredientsFormElement.value = '';
+  stepsFormElement.value = '';
+
+  exportDataPackage();
+  mountEdit();
 }
 
 function mountView() {
