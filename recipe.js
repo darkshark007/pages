@@ -141,12 +141,12 @@ function mountView() {
             <span style="font-weight: bold; font-size: x-large;">"${parsedData['name']}"</span> from <span style="font-style: italic;">${parsedData['author']}</span>
           </td>
         </tr>
-        <tr>
+        <tr style="height: 29.5px">
           <td style="border-bottom: 1px solid navy; padding-top: 5px; padding-bottom: 5px;" colspan=2>
             <a href="${parsedData['url']}" style="font-size: small;">${parsedData['url']}</a>
           </td>
         </tr>
-        <tr>
+        <tr style="height: 29.5px">
           <th style="border-bottom: 1px solid navy; padding-top: 5px; padding-bottom: 5px; text-align: left; text-decoration: underline;">
             Ingredients:
           </th>
