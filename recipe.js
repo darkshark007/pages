@@ -115,7 +115,7 @@ function mountView() {
 
   function makeDynamicRow(ingredient, step) {
     ingredientStepHtml += `
-      <tr>
+      <tr style="height: 29.5px">
         <td style="border-bottom: 1px solid navy; padding-top: 5px; padding-bottom: 5px;" width=40%>
           ${ingredient}
         </td>
@@ -128,8 +128,8 @@ function mountView() {
 
 
   for (let idx = 0; idx < rowCount; idx++) {
-    let nextIngredient = ingredientRows[idx] || " ";
-    let nextStep = stepRows[idx] || " ";
+    let nextIngredient = ingredientRows[idx] || "";
+    let nextStep = stepRows[idx] || "";
     makeDynamicRow(nextIngredient, nextStep);
   }
 
