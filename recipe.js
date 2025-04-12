@@ -57,7 +57,7 @@ function buildPage() {
   buttonNew = window.document.getElementById('buttonNew');
   buttonView.addEventListener('click', mountView);
   buttonEdit.addEventListener('click', mountEdit);
-  buttonNew.addEventListener('click', newRecipe);
+  setNewToConfirm();
   formElement = window.document.createElement('FORM');
   formElement.action='';
   formElement.onsubmit="event.preventDefault();";
@@ -107,7 +107,21 @@ function buildPage() {
   mountView();
 }
 
+let resetTimeout = null;
+function setNewToConfirm() {
+  buttonNew.removeEventListener('click', newRecipe);
+  buttonNew.addEventListener('click', setNewToReset);
+  buttonNew.value = 'New';
+}
+function setNewToReset() {
+  buttonNew.removeEventListener('click', setNewToReset);
+  buttonNew.addEventListener('click', newRecipe);
+  buttonNew.value = 'Click again to confirm Reset';
+  resetTimeout = window.setTimeout(setNewToConfirm, 5000);
+}
+
 function newRecipe() {
+  window.clearTimeout(resetTimeout);
   // Set up form based on the current form version
   nameFormElement.value = '';
   authorFormElement.value = '';
@@ -116,6 +130,7 @@ function newRecipe() {
   stepsFormElement.value = '';
 
   exportDataPackage();
+  setNewToConfirm();
   mountEdit();
 }
 
