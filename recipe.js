@@ -128,8 +128,8 @@ function mountView() {
 
 
   for (let idx = 0; idx < rowCount; idx++) {
-    let nextIngredient = ingredientRows[idx] || "";
-    let nextStep = stepRows[idx] || "";
+    let nextIngredient = ingredientRows[idx] || " ";
+    let nextStep = stepRows[idx] || " ";
     makeDynamicRow(nextIngredient, nextStep);
   }
 
