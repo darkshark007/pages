@@ -24,7 +24,6 @@ function parseDataPackage(data) {
   return parsedData;
 }
 
-
 async function exportDataPackage() {
   console.log('[R] called exportDataPackage');
   let url = new URL(window.location.href);
@@ -103,17 +102,18 @@ function buildPage() {
   // Build the View Element
   viewElement = window.document.createElement('DIV');
 
-  
   mountView();
 }
 
 let resetTimeout = null;
 function setNewToConfirm() {
+  console.log('[R] called setNewToConfirm');
   buttonNew.removeEventListener('click', newRecipe);
   buttonNew.addEventListener('click', setNewToReset);
-  buttonNew.value = 'New';
+  buttonNew.value = 'New Card';
 }
 function setNewToReset() {
+  console.log('[R] called setNewToReset');
   buttonNew.removeEventListener('click', setNewToReset);
   buttonNew.addEventListener('click', newRecipe);
   buttonNew.value = 'Click again to confirm Reset';
@@ -121,6 +121,7 @@ function setNewToReset() {
 }
 
 function newRecipe() {
+  console.log('[R] called newRecipe');
   window.clearTimeout(resetTimeout);
   // Set up form based on the current form version
   nameFormElement.value = '';
