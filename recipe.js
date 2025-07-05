@@ -143,7 +143,6 @@ function mountView() {
       let splitByParagraph = text.split("\n");
   
       function parseParagraph(p) {
-          console.log('>>> parseParagraph');
           if (p.length <= size) {
               output.push(p);
               return;
@@ -151,22 +150,24 @@ function mountView() {
   
           let currentBlock = "";
           let spaceSplit = p.split(" ");
+          let firstParagraph = true;
           while (true) {
               if (spaceSplit.length === 0) break;
-              console.log(spaceSplit); // REMOVE
-              // if (LOOPCOUNT++ > 100) return; // REMOVE
+              let targetSize = firstParagraph ? size : size-3;
               let next = currentBlock+" "+spaceSplit[0];
-              if (next.length <= size) {
+              if (next.length <= targetSize) {
                   currentBlock = next;
                   spaceSplit.splice(0, 1);
                   continue;
               }
-              output.push(currentBlock.trim());
-              currentBlock = "";
-              console.log(spaceSplit.length); // REMOVE
-              console.log(spaceSplit.length === 0); // REMOVE
+              let nextOut = firstParagraph ? currentBlock.trim() : "   "+currentBlock.trim();
+              output.push(nextOut);
+              currentBlock = spaceSplit[0];
+              spaceSplit.splice(0, 1);
+              firstParagraph = false;
           }
-          output.push(currentBlock.trim());
+          let nextOut = firstParagraph ? currentBlock.trim() : "   "+currentBlock.trim();
+          output.push(nextOut);
       }
       for (let par of splitByParagraph) parseParagraph(par);
   
