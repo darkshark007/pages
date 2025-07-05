@@ -192,6 +192,8 @@ function mountView() {
   let ingredientRows = reflowText(parsedData['ingredients'], 35);
   let stepRows = reflowText(parsedData['steps'], 50)
   let rowCount = Math.max(8, ingredientRows.length, stepRows.length);
+  console.log('>>> stepRows'); // TODO: REMOVE
+  console.log(stepRows); // TODO: REMOVE
 
   for (let idx = 0; idx < rowCount; idx++) {
     let nextIngredient = ingredientRows[idx] || "";
