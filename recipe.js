@@ -137,26 +137,60 @@ function newRecipe() {
 
 function mountView() {
   console.log('[R] called mountView');
-  let parsedData = buildDataPackage();
 
-  let ingredientStepHtml = '';
-  let ingredientRows = parsedData['ingredients'].split('\n');
-  let stepRows = parsedData['steps'].split('\n');
-  let rowCount = Math.max(8, ingredientRows.length, stepRows.length);
+  function reflowText(text, size) {
+      let output = [];
+      let splitByParagraph = text.split("\n");
+  
+      function parseParagraph(p) {
+          console.log('>>> parseParagraph');
+          if (p.length <= size) {
+              output.push(p);
+              return;
+          }
+  
+          let currentBlock = "";
+          let spaceSplit = p.split(" ");
+          while (true) {
+              if (spaceSplit.length === 0) break;
+              console.log(spaceSplit); // REMOVE
+              // if (LOOPCOUNT++ > 100) return; // REMOVE
+              let next = currentBlock+" "+spaceSplit[0];
+              if (next.length <= size) {
+                  currentBlock = next;
+                  spaceSplit.splice(0, 1);
+                  continue;
+              }
+              output.push(currentBlock.trim());
+              currentBlock = "";
+              console.log(spaceSplit.length); // REMOVE
+              console.log(spaceSplit.length === 0); // REMOVE
+          }
+          output.push(currentBlock.trim());
+      }
+      for (let par of splitByParagraph) parseParagraph(par);
+  
+      return output;
+  }
 
   function makeDynamicRow(ingredient, step) {
     ingredientStepHtml += `
       <tr style="height: 29.5px">
-        <td style="border-bottom: 1px solid navy; padding-top: 5px; padding-bottom: 5px;" width=40%>
+        <td style="border-bottom: 1px solid navy; padding-top: 5px; padding-bottom: 5px; font-family: monospace;" width=40%>
           ${ingredient}
         </td>
-        <td style="border-bottom: 1px solid navy; padding-top: 5px; padding-bottom: 5px;" width=60%>
+        <td style="border-bottom: 1px solid navy; padding-top: 5px; padding-bottom: 5px; font-family: monospace;" width=60%>
           ${step}
         </td>
       </tr>
     `;
   }
+  let parsedData = buildDataPackage();
 
+  let ingredientStepHtml = '';
+  let ingredientRows = reflowText(parsedData['ingredients'], 36);
+  let stepRows = reflowText(parsedData['steps'], 60)
+  let rowCount = Math.max(8, ingredientRows.length, stepRows.length);
 
   for (let idx = 0; idx < rowCount; idx++) {
     let nextIngredient = ingredientRows[idx] || "";
