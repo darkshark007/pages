@@ -188,8 +188,8 @@ function mountView() {
   let parsedData = buildDataPackage();
 
   let ingredientStepHtml = '';
-  let ingredientRows = reflowText(parsedData['ingredients'], 36);
-  let stepRows = reflowText(parsedData['steps'], 60)
+  let ingredientRows = reflowText(parsedData['ingredients'], 35);
+  let stepRows = reflowText(parsedData['steps'], 50)
   let rowCount = Math.max(8, ingredientRows.length, stepRows.length);
 
   for (let idx = 0; idx < rowCount; idx++) {
