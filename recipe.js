@@ -162,8 +162,11 @@ function mountView() {
               }
               let nextOut = firstParagraph ? currentBlock.trim() : "&nbsp;&nbsp;&nbsp;"+currentBlock.trim();
               output.push(nextOut);
-              currentBlock = spaceSplit[0];
-              spaceSplit.splice(0, 1);
+              currentBlock = "";
+              if (spaceSplit.length > 0) {
+                currentBlock = spaceSplit[0];
+                spaceSplit.splice(0, 1);
+              }
               firstParagraph = false;
           }
           let nextOut = firstParagraph ? currentBlock.trim() : "&nbsp;&nbsp;&nbsp;"+currentBlock.trim();
